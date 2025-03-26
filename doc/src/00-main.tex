@@ -1,0 +1,70 @@
+\documentclass[openany, 11pt]{book}
+\input{preamble}
+\title{Haskell Extensions}
+\author{Idris}
+\date{March 2025}
+
+\usepackage{tocloft} % Package for customizing TOC
+\renewcommand{\thepart}{\arabic{part}}
+\renewcommand{\thechapter}{\thepart.\arabic{chapter}} % Chapter numbers preceded by part number
+\setlength{\cftchapnumwidth}{2.5em} % Space after chapter number
+\setlength{\cftchapindent}{1em} % Indent chapter entries (adjust as needed)
+\setlength{\cftpartindent}{0em} % Keep part entries flush left (default, explicitly set)
+
+\begin{document}
+% \maketitle{}
+\tableofcontents
+
+\part{Introduction}
+\part{Syntax}
+\part{Import and export}
+\part{Types}
+\part{Records}
+
+\chapter{NamedFieldPuns}
+\begin{haskell}{}
+data C = C {a :: Int}
+f (C {a = a}) = a
+\end{haskell}
+becomes
+
+\begin{haskell}{}
+f (C {a}) = a
+\end{haskell}
+
+\url{https://ghc.gitlab.haskell.org/ghc/doc/users_guide/exts/record_puns.html}
+
+\chapter{RecordWildCards}
+\begin{haskell}{}
+data C = C {a :: Int, b :: Int, c :: Int, d :: Int}
+f (C {a = 1, b = b, c = c, d = d}) = b + c + d
+\end{haskell}
+becomes
+
+\begin{haskell}{}
+f (C {a = 1, ..}) = b + c + d
+\end{haskell}
+\url{https://ghc.gitlab.haskell.org/ghc/doc/users_guide/exts/record_wildcards.html}
+
+
+\part{Deriving mechanism}
+\part{Patterns}
+\part{Class and instances declarations}
+\part{Literals}
+\chapter{OverloadedStrings}
+
+\part{Constraints}
+\part{Type signatures}
+\part{Bindings and generalisation}
+\part{Template Haskell}
+\part{Bang patterns and Strict Haskell}
+\part{Parallel and Concurrent}
+\part{Unboxed types and primitive operations}
+\part{Foreign function interface (FFI)}
+\part{Safe Haskell}
+\part{Miscellaneous}
+
+
+
+
+\end{document}

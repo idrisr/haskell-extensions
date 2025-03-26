@@ -1,0 +1,45 @@
+*.als
+*.aux
+*.bbl
+*.bbl-SAVE-ERROR
+*.bcf
+*.bcf-SAVE-ERROR
+*.bib
+*.blg
+*.commandment
+*.definition
+*.devenv
+*.direnv
+.direnv
+*.fdb_latexmk
+*.fls
+*.gz
+*.idx
+*.ilg
+*.ind
+*.law
+*.listing
+*.lof
+*.log
+*.lot
+_minted*
+*.out
+*.pdf
+result
+samples/
+*.synctex.gz
+*.toc
+*.xml
+.envrc
+doc/indentconfig.yaml
+session.yaml
+
+# Devenv
+.devenv*
+devenv.local.nix
+
+# direnv
+.direnv
+
+# pre-commit
+.pre-commit-config.yaml
