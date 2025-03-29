@@ -18,7 +18,28 @@
 \part{Introduction}
 \part{Syntax}
 \part{Import and export}
+
+\chapter{ImportQualifiedPost}
+from
+\begin{haskell}{}
+import qualified A
+import           B
+import           C
+\end{haskell}
+
+to
+\begin{haskell}{}
+import A qualified
+import B
+import C
+\end{haskell}
+
+
 \part{Types}
+
+\chapter{DataKinds}
+https://ghc.gitlab.haskell.org/ghc/doc/users_guide/exts/data_kinds.html
+
 \part{Records}
 
 \chapter{NamedFieldPuns}
