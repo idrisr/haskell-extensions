@@ -1,4 +1,4 @@
-\documentclass[openany, 11pt]{book}
+\documentclass[openany, 12pt]{book}
 \input{preamble}
 \title{Haskell Extensions}
 \author{Idris}
@@ -10,6 +10,7 @@
 \setlength{\cftchapnumwidth}{2.5em} % Space after chapter number
 \setlength{\cftchapindent}{1em} % Indent chapter entries (adjust as needed)
 \setlength{\cftpartindent}{0em} % Keep part entries flush left (default, explicitly set)
+\counterwithin{chapter}{part}
 
 \begin{document}
 % \maketitle{}
@@ -37,8 +38,12 @@ import C
 
 \part{Types}
 
-\chapter{DataKinds}
+\setcounter{chapter}{10}
+\chapter{Datatype promotion---DataKinds}
 \url{https://ghc.gitlab.haskell.org/ghc/doc/users_guide/exts/data_kinds.html}
+
+\setcounter{chapter}{16}
+\chapter{Visible type application---TypeApplications}
 
 \part{Records}
 
@@ -69,8 +74,35 @@ f (C {a = 1, ..}) = b + c + d
 
 
 \part{Deriving mechanism}
+\setcounter{chapter}{5}
+\chapter{Generalised derived instances for newtypes---GeneralisedNewtypeDeriving}
+
 \part{Patterns}
 \part{Class and instances declarations}
+
+\setcounter{chapter}{6}
+\chapter{Functional dependencies}
+\begin{alist}
+	\item used to constrain the parameters of type classes.
+	\item let you state that in a multi-parameter type class
+	\item one of the parameters can be determined from the others
+	\item so that the parameter determined by the others can, for example,
+	\item be the return type but none of the argument types of some of the methods.
+	\item one of two mechansism for type-level functions. the other is type
+	families.
+\end{alist}
+
+\begin{haskell}{}
+--type level function
+class And b1 b2 b | b 1 b 2 -> b where
+    and :: b 1 -> b 2 -> b
+
+instance And True True True    where and undefined
+instance And True False False  where and undefined
+instance And False True False  where and undefined
+instance And False False False where and undefined
+\end{haskell}
+
 \part{Literals}
 \chapter{OverloadedStrings}
 
@@ -78,6 +110,28 @@ f (C {a = 1, ..}) = b + c + d
 \part{Type signatures}
 \part{Bindings and generalisation}
 \part{Template Haskell}
+
+\chapter{QuasiQuotes}
+Quasi-quotation allows patterns and expressions to be written using
+programmer-defined concrete syntax
+
+\begin{definition}{Concrete Syntax}{}
+	Concrete syntax refers to the actual textual representation of code, as
+	opposed to abstract syntax trees.
+	\begin{center}
+		\begin{tabular}{ll}
+			\toprule
+			syntax type & form  \\
+			\midrule
+			concrete    & text  \\
+			abstract    & trees \\
+			\bottomrule
+		\end{tabular}
+	\end{center}
+\end{definition}
+
+\url{https://ghc.gitlab.haskell.org/ghc/doc/users_guide/exts/template_haskell.html#template-haskell-quasi-quotation}
+
 \part{Bang patterns and Strict Haskell}
 \part{Parallel and Concurrent}
 \part{Unboxed types and primitive operations}
