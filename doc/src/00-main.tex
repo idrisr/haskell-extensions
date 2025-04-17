@@ -16,6 +16,17 @@
 % \maketitle{}
 \tableofcontents
 
+\frontmatter
+\chapter{Preface}
+The haskell language extensions are a tough nut to crack. This document is my
+attempt to get stronger on them, contributing in increments whenever I come
+across one I need to learn more deeply---there are a lot I need to learn more
+deeply.
+
+This document is structured the same was as the online documentation for the
+language extensions available here \url{https://ghc.gitlab.haskell.org/ghc/doc/users_guide/exts.html}.
+
+\mainmatter
 \part{Introduction}
 \part{Syntax}
 \part{Import and export}
@@ -66,12 +77,55 @@ data Term a where
     Pair   :: Term a -> Term b -> Term (a,b)
 \end{haskell}
 
-\setcounter{chapter}{10}
+
+\setcounter{chapter}{9}
+\chapter{TypeFamilies---Type families}
+Functions are to values what type families are to types. They provide a way to
+specify how to map one type to another.
+
+\begin{definition}{closed}{}
+	A closed type family is defined all in one place and cannot be extended.
+\end{definition}
+
+\begin{definition}{open}{}
+	Unlike closed type families, which are a black-box, open type families can be extended.
+\end{definition}
+
+
 \chapter{DataKinds---Datatype promotion}
 \url{https://ghc.gitlab.haskell.org/ghc/doc/users_guide/exts/data_kinds.html}
 
+Way to introduce new symbols into the Kind system.
+
+\setcounter{chapter}{13}
+\chapter{PolyKinds---Kind Polymorphism}
+from
+\begin{haskell}{}
+class Typeable (t :: *) where
+    typeOf :: t -> TypeRep
+
+class Typeable1 (t :: * -> *) where
+    typeOf1 :: t a -> TypeRep
+
+class Typeable2 (t :: * -> * -> *) where
+    typeOf2 :: t a b -> TypeRep
+\end{haskell}
+
+to
+\begin{haskell}{}
+{-# LANGUAGE PolyKinds #-}
+data Proxy t = Proxy
+
+class Typeable (t :: k) where
+    typeOf :: Proxy t -> TypeRep
+\end{haskell}
+
 \setcounter{chapter}{16}
 \chapter{TypeApplications---Visible type application}
+
+\setcounter{chapter}{19}
+\chapter{RankNTypes---Arbitrary-rank polymorphism}
+
 
 \part{Records}
 
