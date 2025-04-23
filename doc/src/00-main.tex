@@ -193,6 +193,23 @@ instance And False False False where and undefined
 \part{Type signatures}
 \part{Bindings and generalisation}
 \part{Template Haskell}
+Allows you to do compile-time meta-programming in Haskell.
+
+\begin{definition}{Meta Programming}{}
+	Programs that write programs.
+\end{definition}
+
+\begin{definition}{Compile Time Meta Programming}{}
+	Programs that write programs at compile time.
+\end{definition}
+
+\setcounter{chapter}{2}
+\chapter{Viewing Template Haskell Generated Code}
+\begin{haskell}{}
+-ddump-splices
+\end{haskell}
+
+\setcounter{chapter}{6}
 
 \chapter{QuasiQuotes}
 Quasi-quotation allows patterns and expressions to be written using
