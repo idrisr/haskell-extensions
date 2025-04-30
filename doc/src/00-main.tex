@@ -157,8 +157,11 @@ f (C {a = 1, ..}) = b + c + d
 
 
 \part{Deriving mechanism}
-\setcounter{chapter}{5}
+\setcounter{chapter}{4}
 \chapter{GeneralisedNewtypeDeriving---Generalised derived instances for newtypes}
+
+\setcounter{chapter}{7}
+\chapter{DerivingVia---Deriving via}
 
 \part{Patterns}
 \part{Class and instances declarations}
@@ -185,6 +188,20 @@ instance And True False False  where and undefined
 instance And False True False  where and undefined
 instance And False False False where and undefined
 \end{haskell}
+
+\chapter{Instance declarations and resolution}
+\begin{definition}{Instance Declaration}{}
+	\begin{haskell}{}
+                               context => head
+instance (assertion1, ..., assertionn) => class type1 ... typem where ...
+    \end{haskell}
+\end{definition}
+
+\begin{definition}{Constraint}{}
+	The context is made up of constraints.
+\end{definition}
+
+FlexibleInstances
 
 \part{Literals}
 \chapter{OverloadedStrings}
