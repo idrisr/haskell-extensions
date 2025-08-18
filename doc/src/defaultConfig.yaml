@@ -1,2 +1,9 @@
 verbatimEnvironments:
   haskell: 1
+
+lookForAlignDelims:
+  supertabular: 1
+  tabularx: 1
+  longtable: 1
+  array: 1
+  matrix: 1

@@ -5,6 +5,7 @@
 \date{March 2025}
 
 \usepackage{tocloft} % Package for customizing TOC
+\usepackage{supertabular} % Package for customizing TOC
 \renewcommand{\thepart}{\arabic{part}}
 \renewcommand{\thechapter}{\thepart.\arabic{chapter}} % Chapter numbers preceded by part number
 \setlength{\cftchapnumwidth}{2.5em} % Space after chapter number
@@ -16,7 +17,7 @@
 % \maketitle{}
 \tableofcontents
 
-\frontmatter
+\frontmatter{}
 \chapter{Preface}
 The haskell language extensions are a tough nut to crack. This document is my
 attempt to get stronger on them, contributing in increments whenever I come
@@ -24,10 +25,175 @@ across one I need to learn more deeply---there are a lot I need to learn more
 deeply.
 
 This document is structured the same was as the online documentation for the
-language extensions available here \url{https://ghc.gitlab.haskell.org/ghc/doc/users_guide/exts.html}.
+language extensions available here
+\href{https://ghc.gitlab.haskell.org/ghc/doc/users_guide/exts.html}{users guide}
 
-\mainmatter
+\mainmatter{}
 \part{Introduction}
+\chapter{Controlling editions and extensions}
+\href{https://ghc.gitlab.haskell.org/ghc/doc/users_guide/exts/control.html}{extensions}
+
+GHC supports multiple language editions:
+
+\begin{multicols}{4}
+	\begin{enumerate}[label = {(\arabic*)}]
+		\item Haskell98
+		\item Haskell2010
+		\item GHC2021
+		\item GHC2024
+	\end{enumerate}
+\end{multicols}
+
+Each language edition consists of a collection of language extensions, and there
+are many other language extensions not currently part of a language edition but
+that can be enabled explicitly.
+
+\chapter{Overview of all language extensions}
+\begin{center}
+	\begin{supertabular}{ll}
+		\toprule
+		Extension                  & Description                                                                \\
+		\midrule
+		AllowAmbiguousTypes        & Allow ambiguous types, and type inference engine to infer them.            \\
+		ApplicativeDo              & Allow do-notation statements to be desugared via Applicative.              \\
+		Arrows                     & Allow arrow notation (eg proc)                                             \\
+		BangPatterns               & Allow bang pattern syntax.                                                 \\
+		BinaryLiterals             & Allow binary literal syntax.                                               \\
+		BlockArguments             & Allow do blocks and other constructs as function arguments.                \\
+		CApiFFI                    & Allow foreign imports to be declared with the capi calling convention.     \\
+		ConstrainedClassMethods    & Allow class methods to have non-empty contexts.                            \\
+		ConstraintKinds            & Allow constraints to be used as types of kind Constraint.                  \\
+		CPP                        & Resolve C preprocessor directives.                                         \\
+		CUSKs                      & Detect complete user-supplied kind signatures.                             \\
+		DataKinds                  & Allow use of data constructors in types.                                   \\
+		DatatypeContexts           & Allow contexts on data types.                                              \\
+		DeepSubsumption            & Use GHC's deep subsumption checking.                                       \\
+		DefaultSignatures          & Allow default signatures for typeclass methods.                            \\
+		DeriveAnyClass             & Allow deriving syntax to be used for any class.                            \\
+		DeriveDataTypeable         & Allow deriving for the Data class.                                         \\
+		DeriveFoldable             & Allow deriving for the Foldable class.                                     \\
+		DeriveFunctor              & Allow deriving for the Functor class.                                      \\
+		DeriveGeneric              & Allow deriving of Generic instances.                                       \\
+		DeriveLift                 & Allow deriving for the Lift class                                          \\
+		DeriveTraversable          & Allow deriving for the Traversable class.                                  \\
+		DerivingStrategies         & Allow use of instance deriving strategies.                                 \\
+		DerivingVia                & Allow deriving instances via types of the same runtime representation.     \\
+		DisambiguateRecordFields   & Automatically disambiguate some record field references.                   \\
+		DoAndIfThenElse            & Allow semicolons in if expressions.                                        \\
+		DuplicateRecordFields      & Allow definition of record types with identically-named fields.            \\
+		EmptyCase                  & Allow case expressions with no alternatives.                               \\
+		EmptyDataDecls             & Allow definition of empty data types.                                      \\
+		EmptyDataDeriving          & Allow deriving instances of standard type classes for empty data types.    \\
+		ExistentialQuantification  & Allow existentially quantified type variables in types.                    \\
+		ExplicitForAll             & Allow explicit universal quantification.                                   \\
+		ExplicitLevelImports       & Allow explicit level imports in Template Haskell.                          \\
+		ExplicitNamespaces         & keyword type to specify the namespace of entries in imports and exports.   \\
+		ExtendedDefaultRules       & Use GHCi's extended default rules in a normal module.                      \\
+		ExtendedLiterals           & Allow numeric literal postfix syntax for unboxed integers.                 \\
+		FieldSelectors             & Make record field selector functions visible in expressions.               \\
+		FlexibleContexts           & Remove some restrictions on class contexts                                 \\
+		FlexibleInstances          & Allow instance heads to mention arbitrary nested types.                    \\
+		ForeignFunctionInterface   & Allow foreign function interface syntax.                                   \\
+		FunctionalDependencies     & Allow functional dependencies to be given on typeclass declarations.       \\
+		GADTs                      & Allow definition of generalised algebraic data types.                      \\
+		GADTSyntax                 & Allow generalised algebraic data type syntax.                              \\
+		GeneralisedNewtypeDeriving & Allow instances to be derived via newtype deriving.                        \\
+		GHC2021                    & Use GHC’s set of default language extensions from 2021                     \\
+		GHC2024                    & Use GHC’s set of default language extensions from 2024                     \\
+		GHCForeignImportPrim       & Allow prim calling convention. Intended for internal use only.             \\
+		Haskell2010                & Use the Haskell 2010 language edition.                                     \\
+		Haskell98                  & Use the Haskell 98 language edition.                                       \\
+		HexFloatLiterals           & Allow hexadecimal floating-point literal syntax.                           \\
+		ImplicitParams             & Allow implicit parameter constraints.                                      \\
+		ImplicitPrelude            & Implicitly import Prelude.                                                 \\
+		ImplicitStagePersistence   & identifiers to be used at different levels from where they are defined.    \\
+		ImportQualifiedPost        & Allows the syntax import M qualified                                       \\
+		ImpredicativeTypes         & Allow impredicative types.                                                 \\
+		IncoherentInstances        & Allow definitions of instances that may result in incoherence.             \\
+		InstanceSigs               & Allow type signatures to be written for instance methods.                  \\
+		InterruptibleFFI           & Allow interruptible FFI imports.                                           \\
+		KindSignatures             & Allow kind signatures to be given for types.                               \\
+		LambdaCase                 & Allow case expressions.                                                    \\
+		LexicalNegation            & whitespace to determine whether the minus sign is negation or subtraction  \\
+		LiberalTypeSynonyms        & Relax many of Haskell 98's rules on type synonym definitions.              \\
+		LinearTypes                & Allow writing of linear arrow types. Implies MonoLocalBinds.               \\
+		ListTuplePuns              & Enable punning for list, tuple and sum types.                              \\
+		MagicHash                  & Allow \# as a postfix modifier on identifiers.                             \\
+		MonadComprehensions        & Allow list comprehension syntax to be used at monads other than List.      \\
+		MonoLocalBinds             & Do not generalise types of local bindings.                                 \\
+		MonomorphismRestriction    & Apply the Haskell 2010 monomorphism restriction.                           \\
+		MultilineStrings           & Enable multiline string literals.                                          \\
+		MultiParamTypeClasses      & Enable multi-parameter type classes.                                       \\
+		MultiWayIf                 & Allow multi-way if-expressions.                                            \\
+		NamedDefaults              & Enable default declarations with explicitly named class.                   \\
+		NamedFieldPuns             & Allow record field punning syntax.                                         \\
+		NamedWildCards             & Allow named wildcards in types.                                            \\
+		NegativeLiterals           & Allow negative numeric literal syntax.                                     \\
+		NondecreasingIndentation   & Allow nested contexts at the same indentation level as enclosing context   \\
+		NPlusKPatterns             & Allow use of n+k patterns.                                                 \\
+		NullaryTypeClasses         & Deprecated, does nothing.                                                  \\
+		NumDecimals                & Allow use of scientific notation syntax for integer literals.              \\
+		NumericUnderscores         & Allow underscores in numeric literals.                                     \\
+		OrPatterns                 & Enable or-patterns.                                                        \\
+		OverlappingInstances       & Allow definition of overlapping instances.                                 \\
+		OverloadedLabels           & Allow overloaded label syntax.                                             \\
+		OverloadedLists            & Desugar list syntax via the IsList class.                                  \\
+		OverloadedRecordDot        & Allow . to be used for record field access.                                \\
+		OverloadedRecordUpdate     & Allow . syntax in record updates                                           \\
+		OverloadedStrings          & Desugar string literals via IsString class.                                \\
+		PackageImports             & Allow package-qualified import syntax.                                     \\
+		ParallelListComp           & Allow parallel list comprehension syntax.                                  \\
+		PartialTypeSignatures      & Allow type signatures to contain wildcards.                                \\
+		PatternGuards              & Allow pattern guards syntax.                                               \\
+		PatternSynonyms            & Allow definition of pattern synonyms.                                      \\
+		PolyKinds                  & Allow kind polymorphism.                                                   \\
+		PostfixOperators           & Allow the use of postfix operators.                                        \\
+		QualifiedDo                & Allow qualified do-notation desugaring.                                    \\
+		QuantifiedConstraints      & Allow forall quantifiers in constraints.                                   \\
+		QuasiQuotes                & Allow quasiquotation syntax.                                               \\
+		Rank2Types                 & Enable rank-2 types.                                                       \\
+		RankNTypes                 & Allow types of rank greater than one.                                      \\
+		RebindableSyntax           & Allow rebinding of builtin syntax.                                         \\
+		RecordWildCards            & Allow use of record wildcard syntax.                                       \\
+		RecursiveDo                & Allow recursive do (e.g. mdo) notation.                                    \\
+		RequiredTypeArguments      & Allow use of required type argument syntax in terms.                       \\
+		RoleAnnotations            & Allow role annotation syntax.                                              \\
+		Safe                       & Enable the Safe Haskell Safe mode.                                         \\
+		ScopedTypeVariables        & Lexically scope explicitly-introduced type variables.                      \\
+		StandaloneDeriving         & Allow standalone instance deriving declarations.                           \\
+		StandaloneKindSignatures   & Allow standalone kind signature declarations.                              \\
+		StarIsType                 & Treat * as Data.Kind.Type.                                                 \\
+		StaticPointers             & Allow static syntax.                                                       \\
+		StrictData                 & Treat datatype fields as strict by default.                                \\
+		Strict                     & Make bindings in the current module strict by default.                     \\
+		TemplateHaskell            & Allow Template Haskell's splice and quotation syntax.                      \\
+		TemplateHaskellQuotes      & Allow Template Haskell's quotation syntax.                                 \\
+		TraditionalRecordSyntax    & Allow traditional record syntax (e.g. C {f = x}).                          \\
+		TransformListComp          & Allow generalised list comprehension syntax.                               \\
+		Trustworthy                & Enable the Safe Haskell Trustworthy mode.                                  \\
+		TupleSections              & Allow use of tuple section synxtax.                                        \\
+		TypeAbstractions           & Allow type abstraction syntax in patterns and type variable binders.       \\
+		TypeApplications           & Allow type application syntax in terms and types.                          \\
+		TypeData                   & Allow type data declarations.                                              \\
+		TypeFamilies               & Allow definition of type families.                                         \\
+		TypeFamilyDependencies     & Allow injectivity annotations on type families.                            \\
+		TypeInType                 & Deprecated. Enable kind polymorphism and datatype promotion.               \\
+		TypeOperators              & Allow type constructors to be given operator names.                        \\
+		TypeSynonymInstances       & Allow type synonyms to be mentioned in instance heads.                     \\
+		UnboxedSums                & Allow the use of unboxed sum syntax.                                       \\
+		UnboxedTuples              & Allow the use of unboxed tuple syntax.                                     \\
+		UndecidableInstances       & Allow definition of instances which may make solving undecidable.          \\
+		UndecidableSuperClasses    & superclass constraints, including those that may result in non-termination \\
+		UnicodeSyntax              & Enable unicode syntax.                                                     \\
+		UnliftedDatatypes          & Allow the definition of unlifted data types.                               \\
+		UnliftedFFITypes           & Allow the types of foreign imports to contain certain unlifted types.      \\
+		UnliftedNewtypes           & Allow definition of unlifted newtypes.                                     \\
+		Unsafe                     & Enable Safe Haskell Unsafe mode.                                           \\
+		ViewPatterns               & Allow view pattern syntax.                                                 \\
+		\bottomrule
+	\end{supertabular}
+\end{center}
+
 \part{Syntax}
 \part{Import and export}
 
@@ -201,7 +367,32 @@ instance (assertion1, ..., assertionn) => class type1 ... typem where ...
 	The context is made up of constraints.
 \end{definition}
 
-FlexibleInstances
+\section{FlexibleInstances---Relaxed rules for the instance head}
+The pattern  is <class> (Constructor var1 var2). If you have something else, you
+need to turn this on
+
+\begin{haskell}{}
+instance C (T a b ...)
+\end{haskell}
+
+\section{Formal syntax for instance declaration types}
+\section{Instance termination rules}
+\section{Undecidable instances and loopy superclasses}
+\section{Overlapping instances}
+Normally two instances can't overlap
+
+\begin{haskell}{}
+class Printable a where
+    printMe :: a -> IO ()
+
+instance Printable a where
+    printMe a = putStrLn "dummy instance"
+
+instance Printable Int where
+    printMe a = putStrLn ("I am an Int with value :" ++ show a)
+\end{haskell}
+
+\section{Instance signatures: type signatures in instance declarations}
 
 \part{Literals}
 \chapter{OverloadedStrings}
