@@ -10,6 +10,11 @@
         pkgs = nixpkgs.legacyPackages.${system};
         doc = pkgs.callPackage doc/. { };
       in
-      { packages.default = doc; }
+      {
+        packages = {
+          default = doc;
+          inherit doc;
+        };
+      }
     );
 }
