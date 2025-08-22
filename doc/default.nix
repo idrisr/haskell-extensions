@@ -1,9 +1,32 @@
-{ stdenvNoCC, texliveFull, python312Packages }:
+{ pkgs, stdenvNoCC, python312Packages }:
+let
+  mytex = pkgs.texlive.combine {
+    inherit (pkgs.texlive)
+      biblatex
+      enumitem
+      glossaries
+      latex-bin
+      latexmk
+      minted
+      pdfcol
+      rsfs cm-super
+      scheme-small
+      supertabular
+      tcolorbox
+      tikzfill
+      titlesec
+      tocloft
+      upquote
+      xcolor
+      ;
+  };
+in
+
 stdenvNoCC.mkDerivation {
-  name = "haskell-strings";
-  pname = "haskell-strings";
+  name = "haskell extensions";
+  pname = "haskell extensions";
   src = ./src;
-  nativeBuildInputs = [ texliveFull python312Packages.pygments ];
+  nativeBuildInputs = [ mytex python312Packages.pygments pkgs.biber ];
   buildPhase = ''
     latexmk 00-main.tex
   '';

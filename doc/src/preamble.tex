@@ -3,26 +3,18 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{booktabs}
-\usepackage{csvsimple-l3}
-\usepackage{bussproofs}
-\usepackage{dirtytalk}
 \usepackage[dvipsnames]{xcolor}
 \usepackage{enumitem}
-\usepackage{epigraph}
-\usepackage{forest}
-\usepackage{formal-grammar}
+\usepackage[toc]{glossaries}
 \usepackage{graphicx}
 \usepackage[citecolor=blue,colorlinks=true, linkcolor=blue, urlcolor=blue]{hyperref}
-\usepackage{kantlipsum}
 \usepackage{makeidx}
 \usepackage[margin=0.8in]{geometry}
 \usepackage{mathrsfs}
-\usepackage[outputdir=build]{minted}
+\usepackage{minted}
 \usepackage{multicol}
-\usepackage{standalone}
 \usepackage[style=authortitle]{biblatex}
 \usepackage[T1]{fontenc}
-\usepackage[tableaux]{prooftrees}
 \usepackage{tcolorbox}
 \usepackage{tikz}
 \usepackage{titlesec}
@@ -129,6 +121,19 @@
 	listing engine=minted,
 	minted style=colorful,
 	minted language=haskell,
+	minted options={breaklines,linenos,numbersep=3mm},
+	colback=blue!5!white,colframe=blue!75!black,listing only,
+	left=5mm,enhanced,
+	title={#1},
+	overlay={\begin{tcbclipinterior}\fill[red!20!blue!20!white] (frame.south west)
+				rectangle ([xshift=5mm]frame.north west);\end{tcbclipinterior}}
+}
+
+\newtcblisting{shell}[1]
+{
+	listing engine=minted,
+	minted style=colorful,
+	minted language=shell,
 	minted options={breaklines,linenos,numbersep=3mm},
 	colback=blue!5!white,colframe=blue!75!black,listing only,
 	left=5mm,enhanced,
