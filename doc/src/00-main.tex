@@ -50,6 +50,7 @@ that can be enabled explicitly.
 
 \chapter{Overview of all language extensions}
 \begin{center}
+	\rowcolors{2}{gray!10}{white}
 	\begin{supertabular}{ll}
 		\toprule
 		Extension                  & Description                                                                \\
@@ -243,6 +244,18 @@ data Term a where
     Pair   :: Term a -> Term b -> Term (a,b)
 \end{haskell}
 
+\begin{figure}[H]
+	\begin{center}
+		\begin{forest}
+			[GADT
+					[Constraint Kinds]
+					[Data Kinds]
+			]
+		\end{forest}
+	\end{center}
+	\caption{GADTs become most useful with Constraint and Data Kinds}
+\end{figure}
+
 
 \setcounter{chapter}{9}
 \chapter{TypeFamilies---Type families}
@@ -282,9 +295,26 @@ to
 {-# LANGUAGE PolyKinds #-}
 data Proxy t = Proxy
 
-class Typeable (t :: k) where
-    typeOf :: Proxy t -> TypeRep
+\begin{haskell}{}
+	data App f a = MkApp (f a)
 \end{haskell}
+
+Without polykinds, the kind of \hask{App} is \hask{Type -> Type}.
+
+With polykinds, the kind of \hask{App} is \hask{Type -> Type}.
+
+\begin{center}
+	\begin{tabular}{ll}
+		\toprule
+		\hask{App}                                                & \hask{f}                      \\
+		\midrule
+		\hask{(Type -> Type) -> Type -> Type}                     & \hask{Type -> Type}           \\
+		\hask{((Type -> Type) -> Type) -> (Type -> Type) -> Type} & \hask{(Type -> Type) -> Type} \\
+		\bottomrule
+	\end{tabular}
+\end{center}
+
+In the end all that matters is that \hask{f a} is fully saturated.
 
 \setcounter{chapter}{16}
 \chapter{TypeApplications---Visible type application}
