@@ -351,6 +351,9 @@ f (C {a = 1, ..}) = b + c + d
 \end{haskell}
 \url{https://ghc.gitlab.haskell.org/ghc/doc/users_guide/exts/record_wildcards.html}
 
+Permits a “..” in a record pattern, where each elided field \hask{f} is replaced by the
+pattern \hask{f = f}.
+
 
 \part{Deriving mechanism}
 \setcounter{chapter}{4}
